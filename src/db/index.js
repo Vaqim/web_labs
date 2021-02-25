@@ -13,6 +13,17 @@ async function testConnection() {
   }
 }
 
+async function getAllContacts() {
+  try {
+    const contactsList = await client('contacts').select('*');
+    return contactsList;
+  } catch (error) {
+    console.error(error.message || error);
+    throw error;
+  }
+}
+
 module.exports = {
   testConnection,
+  getAllContacts,
 };
