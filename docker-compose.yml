@@ -1,0 +1,20 @@
+version: '3.7'
+services: 
+  db:
+    container_name: PG_for_web_labs
+    image: postgres:13-alpine
+    environment: 
+      POSTGRES_DB: main
+      POSTGRES_USER: main
+      POSTGRES_PASSWORD: main
+    ports: 
+      - 15432:5432
+    volumes: 
+      - ./.data:/var/lib/postgresql/data
+
+  adminer: 
+    container_name: adminer_for_web_labs
+    image: adminer
+    restart: always
+    ports: 
+      - 18080:8080
