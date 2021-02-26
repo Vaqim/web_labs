@@ -9,31 +9,41 @@ block title
 block content
   .container-sm
     if action === '/contacts/create'
-      form(action = action method = 'POST')
+      form(action = action method = 'POST' style='width: 40rem; margin: 0 auto;')
         .form-group 
           label(for='name') Name
-          input#name.form-control(name = 'name' type='text' placeholder='Type your name here' required)
+          input#name.form-control(name = 'name' type='text' placeholder='Vin' required)
           label(for='surname') Surname
-          input#surname.form-control(name = 'surname' type='text' placeholder='Type your surname here')
+          input#surname.form-control(name = 'surname' type='text' placeholder='Diesel')
           label(for='phone') Phone 
-          input#phone.form-control(name = 'phone' type='text' placeholder='Type your phone here' required)
+          input#phone.form-control(name = 'phone' type='text' placeholder='+380991010101' required)
           label(for='email') Email
-          input#email.form-control(name = 'email' type='email' placeholder='Type your email here')
+          input#email.form-control(name = 'email' type='email' placeholder='example@mail.ua')
           br
-          input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success
+          label.form-label(for='formFileLg') Upload your picture here
+          input#formFileLg.form-control.form-control(type='file')
+          br
+          .input-group
+            input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success
+            input#email.form-control(type='reset' value='Reset').btn.btn-outline-primary
     else
-      form(action = action + '/' + contact.id method = 'POST')
+      form(action = action + '/' + contact.id method = 'POST' style='width: 40rem; margin: 0 auto;')
         .form-group
           label(for='name') Name
-          input#name.form-control(name = 'name' type = 'text' placeholder = 'Type your name here' value = contact.name required)
+          input#name.form-control(name = 'name' type = 'text' placeholder = 'Vin' value = contact.name required)
           label(for='surname') Surname
-          input#surname.form-control(name = 'surname' type = 'text' placeholder = 'Type your surname here' value = contact.surname)
+          input#surname.form-control(name = 'surname' type = 'text' placeholder = 'Diesel' value = contact.surname)
           label(for='phone') Phone
-          input#phone.form-control(name = 'phone' type = 'text' placeholder = 'Type your phone here' value = contact.phone required)
+          input#phone.form-control(name = 'phone' type = 'text' placeholder = '+380991010101' value = contact.phone required)
           label(for='email') Email
-          input#email.form-control(name = 'email' type = 'email' placeholder = 'Type your email here' value = contact.email)
+          input#email.form-control(name = 'email' type = 'email' placeholder = 'example@mail.ua' value = contact.email)
           br
-          input#email.form-control(type='submit' value='Edit contact').btn.btn-outline-primary
+          label.form-label(for='formFileLg') Upload your picture here
+          input#formFileLg.form-control.form-control(type='file')
+          br
+          .input-group
+            input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success
+            input#email.form-control(type='reset' value='Reset').btn.btn-outline-primary
 
 
 
