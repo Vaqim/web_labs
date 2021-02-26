@@ -1,25 +1,37 @@
 const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
 
-const contactseController = require('../controllers/contact');
+const contactsController = require('../controllers/contact');
 
 const contact = Router();
 
 contact.get(
   '/',
+  asyncHandler(async (req, res) => contactsController.getAllContacts(req, res)),
+);
+
+contact.get(
+  '/delete/:id',
+  asyncHandler(async (req, res) => contactsController.deleteContact(req, res)),
+);
+
+contact.get('/create', (req, res) => res.render('contactForm', { action: '/contacts/create' }));
+
+contact.get(
+  '/edit/:id',
+  asyncHandler(async (req, res) => contactsController.getContact(req, res)),
+);
+
+contact.post(
+  '/create',
   asyncHandler(async (req, res) => {
-    try {
-      await contactseController.getAllContacts(req, res);
-    } catch (error) {
-      console.error(error.message || error);
-      res.json({ error: 'Ooops!...' }).status(500);
-      throw error;
-    }
+    await contactsController.createContact(req, res);
   }),
 );
-// contact.get('/:id');
-// contact.post('/create');
-// contact.put('/edit/:id');
-// contact.delete('/delete/:id');
+
+contact.post(
+  '/edit/:id',
+  asyncHandler(async (req, res) => contactsController.updateContact(req, res)),
+);
 
 module.exports = contact;
