@@ -35,7 +35,8 @@ async function deleteContact(id) {
 
 async function createContact(data) {
   try {
-    await client('contacts').insert(data);
+    const id = await client('contacts').insert(data).returning('id');
+    return id[0];
   } catch (error) {
     console.error(error.message || error);
     throw new Error('Can`t create user');
@@ -63,6 +64,25 @@ async function getContact(id) {
   }
 }
 
+async function updateImgUrl(id, imgUrl) {
+  try {
+    await client('contacts').where({ id }).update({ imgUrl });
+  } catch (error) {
+    console.error(error.message || error);
+    throw new Error('Can`t update image url');
+  }
+}
+
+async function getImgUrl(id) {
+  try {
+    const url = await client('contacts').select('imgUrl').where({ id });
+    return url[0].imgUrl;
+  } catch (error) {
+    console.error(error.message || error);
+    throw new Error('Can`t get image url');
+  }
+}
+
 module.exports = {
   testConnection,
   getAllContacts,
@@ -70,4 +90,6 @@ module.exports = {
   createContact,
   updateContact,
   getContact,
+  updateImgUrl,
+  getImgUrl,
 };

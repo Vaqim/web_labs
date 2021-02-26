@@ -6,13 +6,16 @@ block title
 block content
 
   a(href="/contacts/create/" style='width: 40rem;').btn.btn-lg.btn-success Add contact
+
   .album.py-5.bg-wihite
     .container
+      if contacts.length === 0
+        .alert.alert-primary(role='alert' style='width: 40rem; margin: 0 auto') Let`s create contacts!
       .row
         each contact in contacts
           .col-md-4
-            .card.mb-4.box-shadow
-              img.card-img-top(src = '/images/default.png' alt=contact.name + '`s avatar' style='height: 256px; width: 256px; display: block; margin: 0 auto;' data-holder-rendered='true')
+            .card.mb-4.box-shadow 
+              img.card-img-top(src = contact.imgUrl alt=contact.name + '`s avatar' style='height: 256px; width: 256px; display: block; margin: 0 auto;' data-holder-rendered='true')
               .card-body
                 ul.list-group.list-group-flush
                   li.list-group-item #{contact.name}

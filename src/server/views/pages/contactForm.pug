@@ -9,7 +9,7 @@ block title
 block content
   .container-sm
     if action === '/contacts/create'
-      form(action = action method = 'POST' style='width: 40rem; margin: 0 auto;')
+      form(action = action method = 'POST' style='width: 40rem; margin: 0 auto;' enctype="multipart/form-data")
         .form-group 
           label(for='name') Name
           input#name.form-control(name = 'name' type='text' placeholder='Vin' required)
@@ -20,14 +20,14 @@ block content
           label(for='email') Email
           input#email.form-control(name = 'email' type='email' placeholder='example@mail.ua')
           br
-          label.form-label(for='formFileLg') Upload your picture here
-          input#formFileLg.form-control.form-control(type='file')
+          label.form-label(for='picture') Upload your picture here
+          input#picture.form-control.form-control(type='file' name='picture')
           br
           .input-group
             input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success
             input#email.form-control(type='reset' value='Reset').btn.btn-outline-primary
     else
-      form(action = action + '/' + contact.id method = 'POST' style='width: 40rem; margin: 0 auto;')
+      form(action = action + '/' + contact.id method = 'POST' style='width: 40rem; margin: 0 auto;' enctype="multipart/form-data")
         .form-group
           label(for='name') Name
           input#name.form-control(name = 'name' type = 'text' placeholder = 'Vin' value = contact.name required)
@@ -38,8 +38,8 @@ block content
           label(for='email') Email
           input#email.form-control(name = 'email' type = 'email' placeholder = 'example@mail.ua' value = contact.email)
           br
-          label.form-label(for='formFileLg') Upload your picture here
-          input#formFileLg.form-control.form-control(type='file')
+          label.form-label(for='picture') Upload your picture here
+          input#picture.form-control.form-control(type='file' name='picture')
           br
           .input-group
             input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success

@@ -1,8 +1,10 @@
 const { Router } = require('express');
 const asyncHandler = require('express-async-handler');
+const multer = require('multer');
 
 const contactsController = require('../controllers/contact');
 
+const upload = multer();
 const contact = Router();
 
 contact.get(
@@ -24,6 +26,7 @@ contact.get(
 
 contact.post(
   '/create',
+  upload.single('picture'),
   asyncHandler(async (req, res) => {
     await contactsController.createContact(req, res);
   }),
@@ -31,6 +34,7 @@ contact.post(
 
 contact.post(
   '/edit/:id',
+  upload.single('picture'),
   asyncHandler(async (req, res) => contactsController.updateContact(req, res)),
 );
 
