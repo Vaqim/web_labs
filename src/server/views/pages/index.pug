@@ -1,0 +1,37 @@
+extends ../components/layout.pug
+
+block title
+  title Home page
+
+block content
+
+  
+  table.table.table-striped.table-hover
+    thead
+      tr
+        th(scope='col') Name
+        th(scope='col') Surname
+        th(scope='col') Phone
+        th(scope='col') Email
+        th(scope='col' colspan=2)
+          a(href="/contacts/create/").btn.btn-success Create
+    tbody
+      each contact in contacts
+        tr
+          td #{contact.name}
+          td 
+           if contact.surname
+            | #{contact.surname} 
+           else 
+            | -
+          td #{contact.phone}
+          td 
+           if contact.email
+            | #{contact.email} 
+           else 
+            | -
+          td
+            a(href="/contacts/edit/" + contact.id).btn.btn-outline-primary Edit
+          td
+            a(href="/contacts/delete/" + contact.id).btn.btn-outline-danger Delete
+  

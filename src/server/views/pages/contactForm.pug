@@ -1,0 +1,40 @@
+extends ../components/layout.pug
+
+block title
+  if action === '/contacts/create'
+    title Create contact
+  else 
+    title Edit #{contact.name}`s contact
+
+block content
+  .container-sm
+    if action === '/contacts/create'
+      form(action = action method = 'POST')
+        .form-group 
+          label(for='name') Name
+          input#name.form-control(name = 'name' type='text' placeholder='Type your name here' required)
+          label(for='surname') Surname
+          input#surname.form-control(name = 'surname' type='text' placeholder='Type your surname here')
+          label(for='phone') Phone 
+          input#phone.form-control(name = 'phone' type='text' placeholder='Type your phone here' required)
+          label(for='email') Email
+          input#email.form-control(name = 'email' type='email' placeholder='Type your email here')
+          br
+          input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success
+    else
+      form(action = action + '/' + contact.id method = 'POST')
+        .form-group
+          label(for='name') Name
+          input#name.form-control(name = 'name' type = 'text' placeholder = 'Type your name here' value = contact.name required)
+          label(for='surname') Surname
+          input#surname.form-control(name = 'surname' type = 'text' placeholder = 'Type your surname here' value = contact.surname)
+          label(for='phone') Phone
+          input#phone.form-control(name = 'phone' type = 'text' placeholder = 'Type your phone here' value = contact.phone required)
+          label(for='email') Email
+          input#email.form-control(name = 'email' type = 'email' placeholder = 'Type your email here' value = contact.email)
+          br
+          input#email.form-control(type='submit' value='Edit contact').btn.btn-outline-primary
+
+
+
+
