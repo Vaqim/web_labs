@@ -28,7 +28,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  res.send('Home page!');
+  res.render('home');
 });
 
 app.get('/login', (req, res) => {
