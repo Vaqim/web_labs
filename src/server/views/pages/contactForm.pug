@@ -1,0 +1,50 @@
+extends ../components/layout.pug
+
+block title
+  if action === '/contacts/create'
+    title Create contact
+  else 
+    title Edit #{contact.name}`s contact
+
+block content
+  .container-sm
+    if action === '/contacts/create'
+      form(action = action method = 'POST' style='width: 40rem; margin: 0 auto;' enctype="multipart/form-data")
+        .form-group 
+          label(for='name') Name
+          input#name.form-control(name = 'name' type='text' placeholder='Vin' required)
+          label(for='surname') Surname
+          input#surname.form-control(name = 'surname' type='text' placeholder='Diesel')
+          label(for='phone') Phone 
+          input#phone.form-control(name = 'phone' type='text' placeholder='+380991010101' required)
+          label(for='email') Email
+          input#email.form-control(name = 'email' type='email' placeholder='example@mail.ua')
+          br
+          label.form-label(for='picture') Upload your picture here
+          input#picture.form-control.form-control(type='file' name='picture')
+          br
+          .input-group
+            input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success
+            input#email.form-control(type='reset' value='Reset').btn.btn-outline-primary
+    else
+      form(action = action + '/' + contact.id method = 'POST' style='width: 40rem; margin: 0 auto;' enctype="multipart/form-data")
+        .form-group
+          label(for='name') Name
+          input#name.form-control(name = 'name' type = 'text' placeholder = 'Vin' value = contact.name required)
+          label(for='surname') Surname
+          input#surname.form-control(name = 'surname' type = 'text' placeholder = 'Diesel' value = contact.surname)
+          label(for='phone') Phone
+          input#phone.form-control(name = 'phone' type = 'text' placeholder = '+380991010101' value = contact.phone required)
+          label(for='email') Email
+          input#email.form-control(name = 'email' type = 'email' placeholder = 'example@mail.ua' value = contact.email)
+          br
+          label.form-label(for='picture') Upload your picture here
+          input#picture.form-control.form-control(type='file' name='picture')
+          br
+          .input-group
+            input#email.form-control(type='submit' value='Create contact').btn.btn-outline-success
+            input#email.form-control(type='reset' value='Reset').btn.btn-outline-primary
+
+
+
+
