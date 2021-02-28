@@ -31,11 +31,13 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/login', (req, res) => {
-  res.render('login');
-});
+app
+  .route('/login')
+  .get((req, res) => {
+    res.render('login');
+  })
+  .post((req, res) => authController.loginUser(req, res));
 
-app.post('/login', (req, res) => authController.loginUser(req, res));
 app.get('/logout', (req, res) => authController.logoutUser(req, res));
 
 app.use(checkAuth);
