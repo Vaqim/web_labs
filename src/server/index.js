@@ -1,6 +1,13 @@
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const express = require('express');
+
 const contactsRoute = require('./routes/contacts');
+const checkAuth = require('./middlewares/checkAuthorization');
+const authController = require('./controllers/authorization');
+const {
+  authorization: { sessionSecret },
+} = require('../config');
 
 const app = express();
 
@@ -10,7 +17,15 @@ app.set('views', './src/server/views/pages');
 app.use('/', express.static('./src/server/public'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
 
 app.get('/', (req, res) => {
   res.send('Home page!');
@@ -19,6 +34,11 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login');
 });
+
+app.post('/login', (req, res) => authController.loginUser(req, res));
+app.get('/logout', (req, res) => authController.logoutUser(req, res));
+
+app.use(checkAuth);
 
 app.use('/contacts', contactsRoute);
 

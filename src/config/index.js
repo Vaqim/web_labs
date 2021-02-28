@@ -18,6 +18,13 @@ const config = {
       max: 10,
     },
   },
+  authorization: {
+    userData: {
+      username: process.env.LOGIN || 'admin',
+      password: process.env.PASSWORD || 'admin',
+    },
+    sessionSecret: process.env.SESSION_SECRET || 'secret_key',
+  },
 };
 
 module.exports = config;
