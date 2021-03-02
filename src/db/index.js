@@ -83,6 +83,17 @@ async function getImgUrl(id) {
   }
 }
 
+async function prepareDatabase() {
+  try {
+    await client.migrate.latest(dbConfig);
+    await client.seed.run(dbConfig);
+    console.log('Database preparing done');
+  } catch (error) {
+    console.error(error.message || error);
+    throw new Error('Can`t do migrations');
+  }
+}
+
 module.exports = {
   testConnection,
   getAllContacts,
@@ -92,4 +103,5 @@ module.exports = {
   getContact,
   updateImgUrl,
   getImgUrl,
+  prepareDatabase,
 };

@@ -1,5 +1,29 @@
 version: '3.7'
 services: 
+
+  app: 
+    container_name: contacts_app
+    build: .
+    depends_on: 
+      - db
+    environment: 
+      PORT: 3000
+      HOST: 0.0.0.0
+
+      SESSION_SECRET: secret
+
+      LOGIN: admin
+      PASSWORD: 1111
+
+      DB_NAME: main
+      DB_USER: main
+      DB_PASS: main
+      DB_HOST: db
+      DB_PORT: 5432
+    ports: 
+      - 3000:3000
+    restart: always
+
   db:
     container_name: PG_for_web_labs
     image: postgres:13-alpine
@@ -7,8 +31,6 @@ services:
       POSTGRES_DB: main
       POSTGRES_USER: main
       POSTGRES_PASSWORD: main
-    ports: 
-      - 15432:5432
     volumes: 
       - ./.data:/var/lib/postgresql/data
 

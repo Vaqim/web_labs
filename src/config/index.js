@@ -6,6 +6,12 @@ const config = {
   port: process.env.PORT || 3000,
   db: {
     client: 'postgres',
+    migrations: {
+      directory: './src/db/migrations',
+    },
+    seeds: {
+      directory: './src/db/seeds',
+    },
     connection: {
       user: process.env.DB_USER || fatal('no DB_USER'),
       host: process.env.DB_HOST || fatal('no DB_HOST'),

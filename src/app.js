@@ -3,7 +3,7 @@ const { existsSync, mkdirSync } = require('fs');
 
 const { host, port } = require('./config');
 const app = require('./server');
-const { testConnection } = require('./db');
+const { testConnection, prepareDatabase } = require('./db');
 
 const server = createServer(app);
 
@@ -48,6 +48,7 @@ async function boot() {
   enableGracefulExit();
   await testConnection();
   if (!existsSync('./src/server/public/images')) mkdirSync('./src/server/public/images');
+  await prepareDatabase();
   start();
 }
 
