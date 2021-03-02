@@ -1,4 +1,5 @@
 const { createServer } = require('http');
+const { existsSync, mkdirSync } = require('fs');
 
 const { host, port } = require('./config');
 const app = require('./server');
@@ -46,6 +47,7 @@ function enableGracefulExit() {
 async function boot() {
   enableGracefulExit();
   await testConnection();
+  if (!existsSync('./src/server/public/images')) mkdirSync('./src/server/public/images');
   start();
 }
 
